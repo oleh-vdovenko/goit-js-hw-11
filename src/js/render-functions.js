@@ -4,7 +4,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   gallery: document.querySelector('.gallery'),
-  loader: document.querySelector('.preloader'),
+  loader: document.querySelector('.loader'),
 };
 function createImage({
   webformatURL,
@@ -54,8 +54,8 @@ export function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 export function showLoader() {
-  refs.loader.classList.add('loader');
+  refs.loader.style.display = 'block';
 }
 export function hideLoader() {
-  refs.loader.classList.remove('loader');
+  refs.loader.style.display = 'none';
 }

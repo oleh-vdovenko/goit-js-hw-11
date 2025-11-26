@@ -62,10 +62,7 @@ body {
   letter-spacing: 0.04em;
   color: #fff;
 }
-.preloader {
-  display: block;
-  margin: 0 auto 24px auto;
-}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -105,13 +102,15 @@ body {
 }
 
 .loader {
-  display: block;
   position: relative;
   height: 32px;
   border: 2px solid #fff;
   width: 120px;
   background: #fff;
   box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
 }
 .loader:before {
   content: '';

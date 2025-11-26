@@ -12,6 +12,7 @@ const formElem = document.querySelector('.form');
 
 formElem.addEventListener('submit', e => {
   e.preventDefault();
+  clearGallery();
   showLoader();
   const formData = new FormData(formElem);
   const formValues = Object.fromEntries(formData.entries());
@@ -22,7 +23,6 @@ formElem.addEventListener('submit', e => {
         formValues['search-text'].trim() === ''
       ) {
         hideLoader();
-        clearGallery();
         iziToast.show({
           message: `Sorry, there are no images matching your search query. Please try again!`,
           messageColor: 'white',
@@ -33,7 +33,6 @@ formElem.addEventListener('submit', e => {
         });
       } else {
         hideLoader();
-        clearGallery();
         createGallery(response.data.hits);
       }
     })

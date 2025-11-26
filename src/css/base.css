@@ -63,6 +63,7 @@ body {
   color: #fff;
 }
 .preloader {
+  display: block;
   margin: 0 auto 24px auto;
 }
 .gallery {

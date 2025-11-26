@@ -22,7 +22,6 @@ formElem.addEventListener('submit', e => {
         response.data.hits.length === 0 ||
         formValues['search-text'].trim() === ''
       ) {
-        hideLoader();
         iziToast.show({
           message: `Sorry, there are no images matching your search query. Please try again!`,
           messageColor: 'white',
@@ -31,9 +30,10 @@ formElem.addEventListener('submit', e => {
           position: 'center',
           timeout: 2000,
         });
-      } else {
         hideLoader();
+      } else {
         createGallery(response.data.hits);
+        hideLoader();
       }
     })
     .catch(error => {

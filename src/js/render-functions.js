@@ -4,7 +4,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   gallery: document.querySelector('.gallery'),
-  loader: document.querySelector('div'),
+  loader: document.querySelector('.preloader'),
 };
 function createImage({
   webformatURL,

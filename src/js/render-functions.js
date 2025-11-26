@@ -1,9 +1,12 @@
 'use strict';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import getImagesByQuery from './pixabay-api';
-const gallery = document.querySelector('.gallery');
-function createImageTemplate({
+
+const refs = {
+  gallery: document.querySelector('.gallery'),
+  loader: document.querySelector('div'),
+};
+function createImage({
   webformatURL,
   largeImageURL,
   tags,
@@ -12,15 +15,47 @@ function createImageTemplate({
   comments,
   downloads,
 }) {
-  return `<li><a class="gallery-link" href="${largeImageURL}"><img src="${webformatURL}" alt="${tags}"></a><ul><li><h3>Likes</h3><p>${likes}</p></li><li><h3>Views</h3><p>${views}</p></li><li><h3>Comments</h3><p>${comments}</p></li><li><h3>Downloads</h3><p>${downloads}</p></li></ul></li>`;
+  return `<li class="gallery-item">
+            <a class="gallery-link" href="${largeImageURL}">
+                <img class="gallery-image" src="${webformatURL}" alt="${tags}">
+            </a>
+            <ul class="image-stats">
+                <li class="image-stats-item">
+                    <h2 class="stats-text">Likes</h2>
+                    <p class="stats-value">${likes}</p>
+                </li>
+                <li class="image-stats-item">
+                    <h2 class="stats-text">Views</h2>
+                    <p class="stats-value">${views}</p>
+                </li>
+                <li class="image-stats-item">
+                    <h2 class="stats-text">Comments</h2>
+                    <p class="stats-value">${comments}</p>
+                </li>
+                <li class="image-stats-item">
+                    <h2 class="stats-text">Downloads</h2>
+                    <p class="stats-value">${downloads}</p>
+                </li>
+            </ul>
+          </li>`;
 }
-export default function createGallery(images) {
-  imageGallery.refresh();
-  return images.map(createImageTemplate).join('');
-}
-let imageGallery = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a', {
   captions: true,
   captionsData: 'alt',
   captionPosition: 'bottom',
   captionDelay: 250,
 });
+export function createGallery(images) {
+  const markup = images.map(createImage).join('');
+  refs.gallery.innerHTML = markup;
+  lightbox.refresh();
+}
+export function clearGallery() {
+  refs.gallery.innerHTML = '';
+}
+export function showLoader() {
+  refs.loader.classList.add('loader');
+}
+export function hideLoader() {
+  refs.loader.classList.remove('loader');
+}
